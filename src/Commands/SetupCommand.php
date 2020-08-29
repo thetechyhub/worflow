@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Thetechyhub\Workflow\Exceptions\SetupFailedException;
+use Thetechyhub\Workflow\VersionControle;
 
 class SetupCommand extends Command {
 	/**
@@ -38,73 +39,13 @@ class SetupCommand extends Command {
 	 * @return int
 	 */
 	public function handle() {
-		$branchs = config('workflow.branches');
-		$developmentBranch = config('workflow.branches.development');
-
-		$this->verifyCurrentBranch($developmentBranch);
-
-
-		foreach ($branchs as $stage => $branch) {
-			if ($stage === 'development') {
-				continue;
-			}
-
-			$process = Process::fromShellCommandline("git checkout $branch 2>/dev/null || git checkout -b $branch");
-			$process->run();
-
-			$this->info("Created Branch {$branch}");
-
-
-			$process = new Process(['git', 'checkout', $developmentBranch]);
-			$process->run();
-		}
-
-		$this->info("Setup Complete!");
+		$this->handleVersionControle();
 	}
 
-	private function verifyCurrentBranch($developmentBranch) {
-		$branch = null;
+	protected function handleVersionControle() {
+		VersionControle::install();
 
-		$process = new Process(['git', 'rev-parse', '--abbrev-ref', 'HEAD']);
-		$process->run();
-
-		if (!$process->isSuccessful()) {
-			$error = trim($process->getErrorOutput());
-
-			if (strpos($error, "not a git repository")) {
-				$this->initRepo($developmentBranch);
-				return 0;
-			} else {
-				throw new	SetupFailedException($process->getErrorOutput());
-			}
-		}
-
-		$branch = trim($process->getOutput());
-
-		if ($branch != $developmentBranch) {
-			throw new	SetupFailedException("You must be in {$developmentBranch} branch to run this command.");
-		}
-	}
-
-	private function initRepo($branch) {
-
-		$process = new Process(['git', 'init']);
-		$process->run();
-
-		$this->info($process->getOutput());
-
-		$process = new Process(['git', 'checkout', '-b', $branch]);
-		$process->run();
-
-		$process = new Process(['git', 'add', '.']);
-		$process->run();
-
-		$process = new Process(['git', 'commit', '-m', 'Workflow Setup Complete']);
-		$process->run();
-
-		$this->info($process->getOutput());
-
-
-		return $this->verifyCurrentBranch($branch);
+		$this->info('Git version controll scaffolding is complete.');
+		$this->comment('You can run "git remote add origin REPO_URL" to set your remote repository.');
 	}
 }
