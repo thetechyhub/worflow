@@ -50,11 +50,11 @@ class SetupCommand extends Command {
 		$this->line('');
 		$this->line('');
 
-		$this->comment('Run "composer install" to install composer dependencies.');
+		$this->comment('Run "composer update" to install composer dependencies.');
 		$this->line('');
 		$this->line('');
 
-		$this->comment('Run "npm install && npm run watch" to install and compile npm packages.');
+		$this->comment('Run "npm install && npm run dev" to install and compile npm packages.');
 		$this->line('');
 		$this->line('');
 
