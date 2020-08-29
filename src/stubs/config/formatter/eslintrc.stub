@@ -1,0 +1,11 @@
+{
+	"plugins": ["cypress", "chai-friendly"],
+	"extends": [
+		"wesbos",
+		"plugin:cypress/recommended",
+		"plugin:chai-friendly/recommended"
+	],
+	"rules": {
+		"no-param-reassign": "off"
+	}
+}

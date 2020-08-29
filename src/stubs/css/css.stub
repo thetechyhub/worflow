@@ -1,0 +1,24 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+@import url('../../node_modules/@fortawesome/fontawesome-pro/css/all.css');
+
+
+/* FOUC */
+body {
+  opacity: 0;
+  animation: 0.5s 1s forwards fadeIn;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
