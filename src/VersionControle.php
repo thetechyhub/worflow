@@ -3,10 +3,17 @@
 namespace Thetechyhub\Workflow;
 
 use Symfony\Component\Process\Process;
-use Thetechyhub\Workflow\Exceptions\SetupFailedException;
+use Thetechyhub\Workflow\Exceptions\VersionControlInstallException;
 
 class VersionControle {
 
+
+	/**
+	 *  install the version control setup
+	 *
+	 *
+	 * @return void
+	 */
 	public static function install() {
 		$branchs = config('workflow.branches');
 		$developmentBranch = config('workflow.branches.development');
@@ -15,6 +22,13 @@ class VersionControle {
 		static::generate($branchs, $developmentBranch);
 	}
 
+
+	/**
+	 *  generate the git branches required for the CI/CD workflow
+	 *
+	 *
+	 * @return void
+	 */
 	protected static function generate($branchs, $developmentBranch) {
 		foreach ($branchs as $stage => $branch) {
 			if ($stage === 'development') {
@@ -29,6 +43,14 @@ class VersionControle {
 		}
 	}
 
+
+	/**
+	 *  Verify that the current branch is the development branch
+	 *
+	 *
+	 * @throws VersionControlInstallException
+	 * @return void
+	 */
 	protected static function verifyBranch($developmentBranch) {
 		$branch = null;
 
@@ -42,14 +64,14 @@ class VersionControle {
 				static::initRepo($developmentBranch);
 				return;
 			} else {
-				throw new	SetupFailedException($process->getErrorOutput());
+				throw new	VersionControlInstallException($process->getErrorOutput());
 			}
 		}
 
 		$branch = trim($process->getOutput());
 
 		if ($branch != $developmentBranch) {
-			throw new	SetupFailedException("You must be in {$developmentBranch} branch to run this command.");
+			throw new	VersionControlInstallException("You must be in {$developmentBranch} branch to run this command.");
 		}
 	}
 

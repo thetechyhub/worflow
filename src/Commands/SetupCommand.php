@@ -4,10 +4,7 @@ namespace Thetechyhub\Workflow\Commands;
 
 use Illuminate\Console\Command;
 
-use Symfony\Component\Process\Process;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Thetechyhub\Workflow\Exceptions\SetupFailedException;
-use Thetechyhub\Workflow\VersionControle;
+use Thetechyhub\Workflow\Workflow;
 
 class SetupCommand extends Command {
 	/**
@@ -39,13 +36,34 @@ class SetupCommand extends Command {
 	 * @return int
 	 */
 	public function handle() {
-		$this->handleVersionControle();
-	}
-
-	protected function handleVersionControle() {
-		VersionControle::install();
+		Workflow::versionControl();
 
 		$this->info('Git version controll scaffolding is complete.');
 		$this->comment('You can run "git remote add origin REPO_URL" to set your remote repository.');
+		$this->line('');
+		$this->line('');
+
+
+		Workflow::scaffold();
+
+		$this->info('Project structure scaffolding is complete.');
+		$this->line('');
+		$this->line('');
+
+		$this->comment('Run "composer install" to install composer dependencies.');
+		$this->line('');
+		$this->line('');
+
+		$this->comment('Run "npm install && npm run watch" to install and compile npm packages.');
+		$this->line('');
+		$this->line('');
+
+		$this->comment('Run "npx cypress open" to generate cypress scaffolding.');
+		$this->line('');
+		$this->line('');
+
+		$this->comment('If you are using cypress, run "php artisan cypress:boilerplate" to integrate laravel with cypress.');
+		$this->line('');
+		$this->line('');
 	}
 }

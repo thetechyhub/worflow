@@ -1,52 +1,57 @@
 {
-    "name": "thetechyhub/workflow",
-    "description": "DevOps WorkFlow Setup for Laravel Project",
-    "keywords": [
-        "thetechyhub",
-        "workflow"
-    ],
-    "homepage": "https://github.com/thetechyhub/workflow",
-    "license": "MIT",
-    "type": "library",
-    "authors": [
-        {
-            "name": "AIMEN.S.A.SASI",
-            "email": "aimensasi@icloud.com",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php": "^7.2.5",
-        "illuminate/support": "^7.0|^8.0",
-        "laravel/ui": "^2.2"
-    },
-    "require-dev": {
-        "orchestra/testbench": "^5.4.0",
-        "phpunit/phpunit": "^8.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Thetechyhub\\Workflow\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Thetechyhub\\Workflow\\Tests\\": "tests"
-        }
-    },
-    "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Thetechyhub\\Workflow\\WorkflowServiceProvider"
-            ]
-        }
-    }
+	"name": "thetechyhub/workflow",
+	"description": "Complete Scaffolding WorkFlow Setup for Laravel Project",
+	"keywords": [
+		"thetechyhub",
+		"workflow",
+		"scaffolding",
+		"CI/CD",
+		"formatter"
+	],
+	"homepage": "https://github.com/thetechyhub/workflow",
+	"license": "MIT",
+	"type": "library",
+	"authors": [
+		{
+			"name": "AIMEN.S.A.SASI",
+			"email": "aimensasi@icloud.com",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": "^7.2.5",
+		"illuminate/support": "^7.0|^8.0",
+		"laravel/ui": "^2.2"
+	},
+	"require-dev": {
+		"orchestra/testbench": "^5.4.0",
+		"phpunit/phpunit": "^8.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Thetechyhub\\Workflow\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Thetechyhub\\Workflow\\Tests\\": "tests"
+		}
+	},
+	"scripts": {
+		"test": "vendor/bin/phpunit",
+		"test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+	},
+	"config": {
+		"sort-packages": true
+	},
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Thetechyhub\\Workflow\\WorkflowServiceProvider"
+			],
+			"aliases": {
+				"Workflow": "Thetechyhub\\Workflow\\WorkflowFacade"
+			}
+		}
+	}
 }

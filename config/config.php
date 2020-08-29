@@ -8,5 +8,9 @@ return [
 		"development" => "develop",
 		"staging" => "staging",
 		"release" => "master",
+	],
+
+	"fontawesom" => [
+		"key" => ""
 	]
 ];
