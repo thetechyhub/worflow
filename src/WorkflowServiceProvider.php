@@ -4,6 +4,7 @@ namespace Thetechyhub\Workflow;
 
 use Illuminate\Support\ServiceProvider;
 use Thetechyhub\Workflow\Commands\ControllerMakeCommand;
+use Thetechyhub\Workflow\Commands\DeployCommand;
 use Thetechyhub\Workflow\Commands\ModelMakeCommand;
 use Thetechyhub\Workflow\Commands\SetupCommand;
 
@@ -20,6 +21,7 @@ class WorkflowServiceProvider extends ServiceProvider {
 
 			$this->commands([
 				SetupCommand::class,
+				DeployCommand::class,
 			]);
 		}
 	}

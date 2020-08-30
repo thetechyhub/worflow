@@ -12,7 +12,7 @@ class Workflow {
 	 * @return void
 	 */
 	public static function versionControl() {
-		VersionControle::install();
+		(new VersionControle)->install();
 	}
 
 	/**
@@ -22,5 +22,16 @@ class Workflow {
 	 */
 	public static function scaffold() {
 		Scaffold::install();
+	}
+
+
+	/**
+	 * Run deploy on target branch
+	 *
+	 * @param string $target
+	 * @return void
+	 */
+	public static function deploy($target, $type) {
+		return (new VersionControle)->deploy($target, $type);
 	}
 }
