@@ -80,12 +80,11 @@ class UpdateResources {
 
 	protected function updateModelsDirectory() {
 		File::makeDirectory(app_path('Models'));
+		File::delete(base_path('User'));
 
 		copy(
-			app_path('User.php'),
+			__DIR__ . '/../stubs/models/user.stub',
 			app_path('Models/User.php')
 		);
-
-		File::delete(app_path('User.php'));
 	}
 }
