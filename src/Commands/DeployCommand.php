@@ -17,7 +17,7 @@ class DeployCommand extends Command {
 	 *
 	 * @var string
 	 */
-	protected $signature = 'workflow:deploy';
+	protected $signature = 'workflow:deploy {--s| server=local : Define where are you running this command, you can select between local, staging and live.}';
 
 	/**
 	 * The console command description.
@@ -41,6 +41,26 @@ class DeployCommand extends Command {
 	 * @return int
 	 */
 	public function handle() {
+		$server = $this->option('server');
+
+		if (!$server) {
+			$this->line('');
+			$this->error("You must provide a target option");
+			$this->comment('Run "php artisan workflow:deploy --help" to get some guidance.');
+			$this->line('');
+			return 0;
+		}
+
+		if ($server == 'local') {
+			$this->deployOnLocal();
+		} else {
+			Workflow::serverDeploy($server);
+
+			$this->info("Deployment to {$server} is complete");
+		}
+	}
+
+	public function deployOnLocal() {
 		$versionControl = new VersionControle;
 
 		$target = $this->choice('Select your deploy target?', [

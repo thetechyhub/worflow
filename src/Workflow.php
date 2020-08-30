@@ -29,9 +29,20 @@ class Workflow {
 	 * Run deploy on target branch
 	 *
 	 * @param string $target
+	 * @param string $type
 	 * @return void
 	 */
 	public static function deploy($target, $type) {
 		return (new VersionControle)->deploy($target, $type);
+	}
+
+	/**
+	 * Run deploy on target branch
+	 *
+	 * @param string $target
+	 * @return void
+	 */
+	public static function serverDeploy($target) {
+		return (new Deploy)->handle($target);
 	}
 }
