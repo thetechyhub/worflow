@@ -1,11 +1,13 @@
-# Very short description of the package
+# Workflow
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/thetechyhub/workflow.svg?style=flat-square)](https://packagist.org/packages/thetechyhub/workflow)
-[![Build Status](https://img.shields.io/travis/thetechyhub/workflow/master.svg?style=flat-square)](https://travis-ci.org/thetechyhub/workflow)
-[![Quality Score](https://img.shields.io/scrutinizer/g/thetechyhub/workflow.svg?style=flat-square)](https://scrutinizer-ci.com/g/thetechyhub/workflow)
-[![Total Downloads](https://img.shields.io/packagist/dt/thetechyhub/workflow.svg?style=flat-square)](https://packagist.org/packages/thetechyhub/workflow)
+Workflow is a package built to automate and control the workflow of building laravel project and deploying them to the cloud.
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+## Features
+
+- Scaffolding
+- Automated Code formatting
+- Git version management.
+- Github actions for CI/CD
 
 ## Installation
 
@@ -17,14 +19,10 @@ composer require thetechyhub/workflow
 
 ## Usage
 
+Run the following command on a new laravel project, to get started.
+
 ``` php
-// Usage description here
-```
-
-### Testing
-
-``` bash
-composer test
+php artisan workflow:install
 ```
 
 ### Changelog
